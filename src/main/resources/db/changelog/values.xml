@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet id="2" author="andreimunteanu">
+        <sql>
+            insert into country (name)
+            values ('Romania'),
+                   ('Belgia');
+            insert into region (name, country_id)
+            values ('Vrancea', 1),
+                   ('Brasov', 1),
+                   ('Limburg', 2),
+                   ('Prahova', 1),
+                   ('Vlaams Brabant', 2);
+            insert into location (name, region_id)
+            values ('Busteni', 4),
+                   ('Lepsa', 1),
+                   ('Regiune belgia', 3),
+                   ('Regiune prahova', 4);
+            insert into sport (name)
+            values ('alpinism'),
+                   ('canoe'),
+                   ('mountain biking');
+            insert into sport_location (sport_id, location_id, price, start_date, end_date)
+            values (1, 1, 300, '2022-01-02', '2022-06-30'),
+                (1, 2, 100, '2022-01-01', '2022-05-15'),
+                (2, 4, 50, '2022-08-15', '2022-12-15'),
+                (1, 4, 325.5, '2022-03-22', '2022-12-31'),
+                (1, 4, 625.9, '2022-01-01', '2022-03-01');
+        </sql>
+
+    </changeSet>
+</databaseChangeLog>
