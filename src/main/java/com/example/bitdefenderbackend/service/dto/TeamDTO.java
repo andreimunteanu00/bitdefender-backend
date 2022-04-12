@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 @Data
@@ -13,7 +13,7 @@ public class TeamDTO implements Serializable {
 
     private Long id;
     private String name;
-    private Date createdDate;
+    private ZonedDateTime createdDate;
     private Set<EmployeeDTO> employees;
     private EmployeeDTO manager;
 

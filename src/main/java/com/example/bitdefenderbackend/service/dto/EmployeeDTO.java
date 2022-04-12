@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.Set;
 
 @Data

@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,8 +23,8 @@ public class Team implements Serializable {
     @Column(name = "created_date")
     private ZonedDateTime createdDate;
 
-    @OneToMany(mappedBy = "team")
-    private Set<Employee> employees;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "team")
+    private Set<Employee> employees = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "manager_id")

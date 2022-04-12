@@ -19,11 +19,14 @@
             <column name="first_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="birth_date" type="datetime">
                 <constraints nullable="false" />
             </column>
             <column name="team_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
         </createTable>
 

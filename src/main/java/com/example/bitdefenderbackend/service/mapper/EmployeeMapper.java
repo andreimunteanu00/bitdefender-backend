@@ -1,22 +1,19 @@
 package com.example.bitdefenderbackend.service.mapper;
 
 import com.example.bitdefenderbackend.entity.Employee;
-import com.example.bitdefenderbackend.entity.Role;
+import com.example.bitdefenderbackend.entity.Team;
 import com.example.bitdefenderbackend.service.dto.EmployeeDTO;
-import com.example.bitdefenderbackend.service.dto.RoleDTO;
+import com.example.bitdefenderbackend.service.dto.TeamDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface EmployeeMapper extends EntityMapper<EmployeeDTO, Employee> {
 
-    @Mapping(target = "team.manager", qualifiedByName = "manager")
-    @Mapping(target = "team.employees", ignore = true)
+    @Mapping(target = "team", qualifiedByName = "team")
     EmployeeDTO toDto(Employee employee);
 
     Employee toEntity(EmployeeDTO employeeDTO);
@@ -25,23 +22,18 @@ public interface EmployeeMapper extends EntityMapper<EmployeeDTO, Employee> {
 
     List<Employee> toEntity(List<EmployeeDTO> employeeDTOList);
 
-    @Named("manager")
-    default EmployeeDTO manager(Employee employee) {
+    @Named("team")
+    default TeamDTO team(Team team) {
+        TeamDTO teamDTO = new TeamDTO();
+        teamDTO.setId(team.getId());
+        teamDTO.setName(team.getName());
+        teamDTO.setCreatedDate(team.getCreatedDate());
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(employee.getId());
-        employeeDTO.setFirstName(employee.getFirstName());
-        employeeDTO.setLastName(employee.getLastName());
-        Set<RoleDTO> roleDTOList = new HashSet<>();
-        for (Role role : employee.getRoles()) {
-            RoleDTO aux = new RoleDTO();
-            aux.setName(role.getName());
-            aux.setCreatedDate(role.getCreatedDate());
-            aux.setId(role.getId());
-            aux.setId(role.getId());
-            roleDTOList.add(aux);
-        }
-        employeeDTO.setRoles(roleDTOList);
-        return employeeDTO;
+        employeeDTO.setId(team.getManager().getId());
+        employeeDTO.setFirstName(team.getManager().getFirstName());
+        employeeDTO.setLastName(team.getManager().getLastName());
+        teamDTO.setManager(employeeDTO);
+        return teamDTO;
     }
 
 }
