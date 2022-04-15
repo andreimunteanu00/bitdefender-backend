@@ -14,6 +14,7 @@ public class EmployeeDTO implements Serializable {
     private Long id;
     private String lastName;
     private String firstName;
+    private String email;
     private ZonedDateTime birthDate;
     private Set<RoleDTO> roles;
     private TeamDTO team;

@@ -13,6 +13,7 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("api/team")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TeamController {
     
     private final TeamService teamService;

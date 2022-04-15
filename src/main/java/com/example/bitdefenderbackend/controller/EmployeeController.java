@@ -2,16 +2,21 @@ package com.example.bitdefenderbackend.controller;
 
 import com.example.bitdefenderbackend.service.EmployeeService;
 import com.example.bitdefenderbackend.service.dto.EmployeeDTO;
+import com.example.bitdefenderbackend.util.Pagination;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.Objects;
 
 @RestController
 @RequestMapping("api/employee")
+// not spring security implemented
+@CrossOrigin(origins = "http://localhost:4200")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -23,7 +28,8 @@ public class EmployeeController {
     @GetMapping("")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees(Pageable pageable) {
         Page<EmployeeDTO> page = employeeService.findAll(pageable);
-        return ResponseEntity.ok(page.getContent());
+        HttpHeaders headers = Pagination.generatePaginationHttpHeaders(page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     @GetMapping("/{id}")
