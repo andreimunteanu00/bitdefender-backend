@@ -9,5 +9,6 @@
 
     <include file="db/changelog/init_tables.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/constraints.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/values.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
