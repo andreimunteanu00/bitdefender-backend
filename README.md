@@ -1,7 +1,6 @@
 # Atta System Backend
 
-TODO
-* [DatabaseRelations](https://imgur.com/a/gAPMN0g)
+* [DatabaseRelations](https://imgur.com/a/k4wt0Ee)
   
 Docker setup
 
@@ -9,3 +8,5 @@ Docker setup
 start:  docker-compose -f docker/mariadb.yml up -d
 stop:   docker-compose -f docker/mariadb.yml down
 ```
+
+Map struct added for circular dependency and future implementations
