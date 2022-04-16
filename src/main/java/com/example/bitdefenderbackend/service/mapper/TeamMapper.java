@@ -26,21 +26,26 @@ public interface TeamMapper extends EntityMapper<TeamDTO, Team> {
 
     @Named("manager")
     default EmployeeDTO manager(Employee employee) {
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(employee.getId());
-        employeeDTO.setFirstName(employee.getFirstName());
-        employeeDTO.setLastName(employee.getLastName());
-        Set<RoleDTO> roleDTOList = new HashSet<>();
-        for (Role role : employee.getRoles()) {
-            RoleDTO aux = new RoleDTO();
-            aux.setName(role.getName());
-            aux.setCreatedDate(role.getCreatedDate());
-            aux.setId(role.getId());
-            aux.setId(role.getId());
-            roleDTOList.add(aux);
+        if (employee != null) {
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            employeeDTO.setId(employee.getId());
+            employeeDTO.setFirstName(employee.getFirstName());
+            employeeDTO.setLastName(employee.getLastName());
+            Set<RoleDTO> roleDTOList = new HashSet<>();
+            for (Role role : employee.getRoles()) {
+                if (employee.getRoles() != null) {
+                    RoleDTO aux = new RoleDTO();
+                    aux.setName(role.getName());
+                    aux.setCreatedDate(role.getCreatedDate());
+                    aux.setId(role.getId());
+                    aux.setId(role.getId());
+                    roleDTOList.add(aux);
+                }
+            }
+            employeeDTO.setRoles(roleDTOList);
+            return employeeDTO;
         }
-        employeeDTO.setRoles(roleDTOList);
-        return employeeDTO;
+        return null;
     }
 
     @AfterMapping

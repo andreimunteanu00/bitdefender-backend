@@ -22,7 +22,7 @@
             <column name="email" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="birth_date" type="datetime">
+            <column name="birth_date" type="timestamp">
                 <constraints nullable="false" />
             </column>
             <column name="team_id" type="bigint">
@@ -37,7 +37,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="created_date" type="datetime">
+            <column name="created_date" type="timestamp">
                 <constraints nullable="false" />
             </column>
         </createTable>
@@ -49,7 +49,7 @@
             <column name="name" type="varchar(255)">
                 <constraints unique="true"/>
             </column>
-            <column name="created_date" type="datetime">
+            <column name="created_date" type="timestamp">
                 <constraints nullable="false" />
             </column>
             <column name="manager_id" type="bigint">

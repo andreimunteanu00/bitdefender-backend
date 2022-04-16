@@ -24,16 +24,21 @@ public interface EmployeeMapper extends EntityMapper<EmployeeDTO, Employee> {
 
     @Named("team")
     default TeamDTO team(Team team) {
-        TeamDTO teamDTO = new TeamDTO();
-        teamDTO.setId(team.getId());
-        teamDTO.setName(team.getName());
-        teamDTO.setCreatedDate(team.getCreatedDate());
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(team.getManager().getId());
-        employeeDTO.setFirstName(team.getManager().getFirstName());
-        employeeDTO.setLastName(team.getManager().getLastName());
-        teamDTO.setManager(employeeDTO);
-        return teamDTO;
+        if (team != null) {
+            TeamDTO teamDTO = new TeamDTO();
+            teamDTO.setId(team.getId());
+            teamDTO.setName(team.getName());
+            teamDTO.setCreatedDate(team.getCreatedDate());
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            if (team.getManager() != null) {
+                employeeDTO.setId(team.getManager().getId());
+                employeeDTO.setFirstName(team.getManager().getFirstName());
+                employeeDTO.setLastName(team.getManager().getLastName());
+                teamDTO.setManager(employeeDTO);
+            }
+            return teamDTO;
+        }
+        return null;
     }
 
 }

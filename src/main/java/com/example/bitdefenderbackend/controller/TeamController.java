@@ -2,8 +2,10 @@ package com.example.bitdefenderbackend.controller;
 
 import com.example.bitdefenderbackend.service.TeamService;
 import com.example.bitdefenderbackend.service.dto.TeamDTO;
+import com.example.bitdefenderbackend.util.Pagination;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,8 @@ public class TeamController {
     @GetMapping("")
     public ResponseEntity<List<TeamDTO>> getAllTeam(Pageable pageable) {
         Page<TeamDTO> page = teamService.findAll(pageable);
-        return ResponseEntity.ok(page.getContent());
+        HttpHeaders headers = Pagination.generatePaginationHttpHeaders(page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     @GetMapping("/{id}")

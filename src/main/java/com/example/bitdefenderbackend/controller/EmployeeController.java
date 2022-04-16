@@ -3,6 +3,8 @@ package com.example.bitdefenderbackend.controller;
 import com.example.bitdefenderbackend.service.EmployeeService;
 import com.example.bitdefenderbackend.service.dto.EmployeeDTO;
 import com.example.bitdefenderbackend.util.Pagination;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -41,6 +43,12 @@ public class EmployeeController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/freemanager")
+    public ResponseEntity<List<EmployeeDTO>> getAllByNoManager() {
+        List<EmployeeDTO> result = employeeService.findAllByNoManager();
+        return ResponseEntity.ok(result);
+    }
+
     @PostMapping("")
     public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
         EmployeeDTO result = employeeService.save(employeeDTO);
@@ -58,6 +66,7 @@ public class EmployeeController {
         return ResponseEntity.ok(result);
     }
 
+    @Cascade(CascadeType.DELETE)
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable(value = "id") Long id) {
         employeeService.deleteById(id);

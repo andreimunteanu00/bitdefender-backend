@@ -2,8 +2,10 @@ package com.example.bitdefenderbackend.controller;
 
 import com.example.bitdefenderbackend.service.RoleService;
 import com.example.bitdefenderbackend.service.dto.RoleDTO;
+import com.example.bitdefenderbackend.util.Pagination;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,8 @@ public class RoleController {
     @GetMapping("")
     public ResponseEntity<List<RoleDTO>> getAllRoles(Pageable pageable) {
         Page<RoleDTO> page = roleService.findAll(pageable);
-        return ResponseEntity.ok(page.getContent());
+        HttpHeaders headers = Pagination.generatePaginationHttpHeaders(page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     @GetMapping("/{id}")

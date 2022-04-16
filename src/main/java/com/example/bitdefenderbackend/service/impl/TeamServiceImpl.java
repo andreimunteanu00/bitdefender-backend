@@ -1,6 +1,7 @@
 package com.example.bitdefenderbackend.service.impl;
 
 import com.example.bitdefenderbackend.entity.Team;
+import com.example.bitdefenderbackend.repository.EmployeeRepository;
 import com.example.bitdefenderbackend.repository.TeamRepository;
 import com.example.bitdefenderbackend.service.TeamService;
 import com.example.bitdefenderbackend.service.dto.TeamDTO;
@@ -18,10 +19,13 @@ public class TeamServiceImpl implements TeamService {
 
     private final TeamRepository teamRepository;
 
+    private final EmployeeRepository employeeRepository;
+
     private final TeamMapper teamMapper;
 
-    public TeamServiceImpl(TeamRepository teamRepository, TeamMapper teamMapper) {
+    public TeamServiceImpl(TeamRepository teamRepository, EmployeeRepository employeeRepository, TeamMapper teamMapper) {
         this.teamRepository = teamRepository;
+        this.employeeRepository = employeeRepository;
         this.teamMapper = teamMapper;
     }
 
@@ -40,6 +44,7 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public TeamDTO save(TeamDTO teamDTO) {
         Team team = teamMapper.toEntity(teamDTO);
+        team.setEmployees(employeeRepository.findAllByTeamId(team.getId()));
         team = teamRepository.save(team);
         return teamMapper.toDto(team);
     }

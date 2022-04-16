@@ -1,6 +1,7 @@
 package com.example.bitdefenderbackend.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude="manager")
 @Table(name = "team")
 public class Team implements Serializable {
 
