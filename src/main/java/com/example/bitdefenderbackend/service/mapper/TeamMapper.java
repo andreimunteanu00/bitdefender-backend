@@ -31,9 +31,9 @@ public interface TeamMapper extends EntityMapper<TeamDTO, Team> {
             employeeDTO.setId(employee.getId());
             employeeDTO.setFirstName(employee.getFirstName());
             employeeDTO.setLastName(employee.getLastName());
-            Set<RoleDTO> roleDTOList = new HashSet<>();
-            for (Role role : employee.getRoles()) {
-                if (employee.getRoles() != null) {
+            if (employee.getRoles() != null) {
+                Set<RoleDTO> roleDTOList = new HashSet<>();
+                for (Role role : employee.getRoles()) {
                     RoleDTO aux = new RoleDTO();
                     aux.setName(role.getName());
                     aux.setCreatedDate(role.getCreatedDate());
@@ -41,8 +41,8 @@ public interface TeamMapper extends EntityMapper<TeamDTO, Team> {
                     aux.setId(role.getId());
                     roleDTOList.add(aux);
                 }
+                employeeDTO.setRoles(roleDTOList);
             }
-            employeeDTO.setRoles(roleDTOList);
             return employeeDTO;
         }
         return null;

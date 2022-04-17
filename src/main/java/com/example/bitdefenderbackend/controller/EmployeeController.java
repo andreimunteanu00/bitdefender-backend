@@ -10,14 +10,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.Objects;
 
 @RestController
 @RequestMapping("api/employee")
-// not spring security implemented
 @CrossOrigin(origins = "http://localhost:4200")
 public class EmployeeController {
 
@@ -43,7 +41,7 @@ public class EmployeeController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/freemanager")
+    @GetMapping("/free/manager")
     public ResponseEntity<List<EmployeeDTO>> getAllByNoManager() {
         List<EmployeeDTO> result = employeeService.findAllByNoManager();
         return ResponseEntity.ok(result);

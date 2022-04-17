@@ -7,6 +7,8 @@ import com.example.bitdefenderbackend.service.dto.EmployeeDTO;
 import com.example.bitdefenderbackend.service.mapper.EmployeeMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -52,8 +54,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteById(Long id) {
-        employeeRepository.findByIdAndSetManagerNull(id);
-        employeeRepository.deleteById(id);
+        //employeeRepository.findByIdAndSetManagerNull(id);
+        //employeeRepository.findByIdAndDeleteRoleFromEmployee(id);
+        employeeRepository.myDelete(id);
     }
 
     @Override

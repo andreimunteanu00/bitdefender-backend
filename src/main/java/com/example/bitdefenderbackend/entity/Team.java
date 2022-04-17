@@ -25,7 +25,7 @@ public class Team implements Serializable {
     @Column(name = "created_date")
     private ZonedDateTime createdDate;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "team")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "team")
     private Set<Employee> employees = new HashSet<>();
 
     @ManyToOne

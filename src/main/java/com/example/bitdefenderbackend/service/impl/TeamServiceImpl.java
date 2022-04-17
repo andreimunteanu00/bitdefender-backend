@@ -1,10 +1,12 @@
 package com.example.bitdefenderbackend.service.impl;
 
+import com.example.bitdefenderbackend.entity.Employee;
 import com.example.bitdefenderbackend.entity.Team;
 import com.example.bitdefenderbackend.repository.EmployeeRepository;
 import com.example.bitdefenderbackend.repository.TeamRepository;
 import com.example.bitdefenderbackend.service.TeamService;
 import com.example.bitdefenderbackend.service.dto.TeamDTO;
+import com.example.bitdefenderbackend.service.mapper.EmployeeMapper;
 import com.example.bitdefenderbackend.service.mapper.TeamMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,6 +58,8 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void deleteById(Long id) {
+        teamRepository.setManagerIdNull(id);
+        employeeRepository.findAllByTeamIdAndSetTeamIdNull(id);
         teamRepository.deleteById(id);
     }
 }
