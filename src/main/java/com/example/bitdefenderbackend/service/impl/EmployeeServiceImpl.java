@@ -54,8 +54,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteById(Long id) {
-        //employeeRepository.findByIdAndSetManagerNull(id);
-        //employeeRepository.findByIdAndDeleteRoleFromEmployee(id);
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if (employee != null) {
+            employee.setRoles(null);
+            employee.setTeam(null);
+        }
         employeeRepository.myDelete(id);
     }
 
